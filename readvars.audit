@@ -1,0 +1,464 @@
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 30.14sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 32.42sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.06sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 29.19sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.05sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 30.70sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.05sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 30.45sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 30.14sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 30.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 34.06sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  1.88sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  1.67sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 22.84sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 15.95sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  3.14sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  1.72sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  1.44sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  3.98sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  3.42sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 19.64sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 14.17sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 23.11sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.05sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 14.73sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 34.55sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.05sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 32.91sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.05sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 36.53sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 37.52sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.05sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 34.52sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.03sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min  3.48sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 11.55sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.02sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.rvi
+ input file:eplusout.eso
+ output file:eplusout.csv
+ getting all vars from:eplusout.eso
+  number variables requested for output=         248
+ ReadVars Run Time=00hr 00min 37.05sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:.Small_Office.mvi
+ input file:eplusout.mtr
+ output file:eplusmtr.csv
+ getting all vars from:eplusout.mtr
+  number variables requested for output=           3
+ ReadVars Run Time=00hr 00min  0.05sec
+ ReadVarsESO program completed successfully.
