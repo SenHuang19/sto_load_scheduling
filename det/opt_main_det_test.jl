@@ -17,7 +17,7 @@ function run(GUI_input::Dict)
         @eval $(Symbol(key)) = $value
     end
 	###### Inputs ######
-	Delta_T = 1;	 	# prediction resolution in min,
+	Delta_T = 60;	 	# prediction resolution in min,
 	N = 31;              # Max length of simulation in days
 	# Tr = 24;     		# Tzon Setpoint in C
 	solverflag = 2; 		# 1 for the 1st-order RC model
@@ -26,7 +26,7 @@ function run(GUI_input::Dict)
 	optcost_flag = 1;	# enable price profile in the cost function
 	# sto_model_flag = 0; # 1 if stochastic variables' distributions are known, 0 otherwise
 	# Ntime = length(forecast) # length of timestamps
-	dT_m = 1; # model prediction interval in hour (Optimization based only)
+	dT_m = 1; # model Tsetpoint forecast interval in hour (Optimization based only)
 	Tbd = 0.5; # bandwidth of T bounds around Tsetpoint
 
 	numzones = 10 		# Number of zones in building
@@ -36,16 +36,26 @@ function run(GUI_input::Dict)
 
 	Tr = zeros(numzones,Int(24/dT_m))
 	T_oa = OutdoorAirTemperature;
-	T_S2 = mean(Tzon1);
-	T_E2 = mean(Tzon2);
-	T_N2 = mean(Tzon3);
-	T_W2 = mean(Tzon4);
-	T_C2 = mean(Tzon5);
-	T_S1 = mean(Tzon6);
-	T_E1 = mean(Tzon7);
-	T_N1 = mean(Tzon8);
-	T_W1 = mean(Tzon9);
-	T_C1 = mean(Tzon10);
+	# T_S2 = mean(Tzon1);
+	# T_E2 = mean(Tzon2);
+	# T_N2 = mean(Tzon3);
+	# T_W2 = mean(Tzon4);
+	# T_C2 = mean(Tzon5);
+	# T_S1 = mean(Tzon6);
+	# T_E1 = mean(Tzon7);
+	# T_N1 = mean(Tzon8);
+	# T_W1 = mean(Tzon9);
+	# T_C1 = mean(Tzon10);
+	T_S2 = Tzon1[end];
+	T_E2 = Tzon2[end];
+	T_N2 = Tzon3[end];
+	T_W2 = Tzon4[end];
+	T_C2 = Tzon5[end];
+	T_S1 = Tzon6[end];
+	T_E1 = Tzon7[end];
+	T_N1 = Tzon8[end];
+	T_W1 = Tzon9[end];
+	T_C1 = Tzon10[end];
 	Tr[1,:] = Trzon1;
 	Tr[2,:] = Trzon2;
 	Tr[3,:] = Trzon3;
@@ -56,14 +66,18 @@ function run(GUI_input::Dict)
 	Tr[8,:] = Trzon8;
 	Tr[9,:] = Trzon9;
 	Tr[10,:] = Trzon10;
-	T_oa_p = forecast; #(forecast.-32)./(1.8); ##?? Farheit degree to Celcius degree
+	Toa_p = forecast; #(forecast.-32)./(1.8); ##?? Farheit degree to Celcius degree
 
 	T_zon0 = [T_S2 T_E2 T_N2 T_W2 T_C2 T_S1 T_E1 T_N1 T_W1 T_C1];
 
 	price = CSV.read(string("prices_profile.csv"), DataFrame)[!,Symbol("price")][1:end];
 	price[721:1080] = price[721:1080].*2; # Double the price during occupied period(12pm to 18pm)
 
-	Coeffs_file = string("linear_coefs_avg.csv");
+	if Delta_T == 60
+		Coeffs_file = string("linear_coefs_avg.csv");
+	elseif Delta_T == 1
+		Coeffs_file = string("linear_coefs_raw.csv");
+	end
 	coeffs = zeros(numzones,numcoeffs)
 	Pm = zeros(numzones)
 	for z = 1:numzones
@@ -76,7 +90,8 @@ function run(GUI_input::Dict)
 
 	# global dband = 4 # C
 	# Tzmin = Tr.-dband;
-	Tzmax = Tr;
+	Tzmax = repeat(Tr, inner=(1,Int(60/Delta_T)));
+	T_oa_p = repeat(Toa_p,inner=(Int(60/Delta_T),1));
 	# Simulation time in minutes
 	global Tinit = T_zon0;
 	# # Tinit = repeat(Tinit, Int(numzones/10));
@@ -85,15 +100,17 @@ function run(GUI_input::Dict)
 	global Pc_p = zeros(numzones)
 	global Tzon_p = zeros(numzones)
 	# global cputime = 0;
-	global dT = Delta_T/60; # Delta_T in hour
+	global dT = Delta_T/60; # Delta_T in minute
 	global Optimization_input = Dict("numzones" => numzones,
 	"coeffs"=>coeffs,
 	"Pm" 	=> Pm,
 	"price" => price,
 	"min_idx"=>min_idx,
 	# "hour_idx"=>hour_idx,
-	"Delta_T"=>Delta_T,
-	"dT" 	=> dT_m,
+	"dT_m"  => dT_m,
+	"dT" 	=> dT,
+	"Tr"	=> Tr,
+	"Toa_p" => Toa_p,
 	"t_0"	=> 0,
 	"T_oa"  => T_oa,
 	"T_oa_p"=> T_oa_p,

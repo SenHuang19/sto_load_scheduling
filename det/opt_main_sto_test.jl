@@ -1,8 +1,5 @@
 module Controller
-#include("opt_engine_stoch.jl")
-include("opt_engine_stoch_constraint.jl")
-
-
+include("opt_engine_stoch.jl")
 using .Opt_engine
 
 using CSV
@@ -31,7 +28,7 @@ function run(GUI_input::Dict)
 	optcost_flag = 1;	# enable price profile in the cost function
 	# sto_model_flag = 0; # 1 if stochastic variables' distributions are known, 0 otherwise
 	debugflag = 1;
-	numrl = 10;        # number of scenarios for stochastic programming
+	numrl = 87;        # number of scenarios for stochastic programming
 
 	numzones = 10 		# Number of zones in building
 	numcoeffs = 4 		# Number of coefficients of zone-temp model
@@ -57,15 +54,24 @@ function run(GUI_input::Dict)
 	# Ncontrol = round(Int,Ntime/60/dT_m); # number of control data
 	Npred = round(Int,24/dT_m); # Length of prediction horizon
 	Tzon_sto = zeros(numzones,Npred, numrl);
+	# if uncertzon_flag == 1
+	# 	for i = 1:numrl
+	# 		sto_Data_file = string("Data/Sto_scenarios/Tz_n_sto$(i).csv");
+	# 		# println("$i th case")
+	# 		if (t%10080)==0
+	# 			Tzon_sto[:,:,i] = reshape(CSV.read(sto_Data_file, DataFrame)[!, "10080"][1:end],Npred,numzones)';
+	# 		else
+	# 			Tzon_sto[:,:,i] = reshape(CSV.read(sto_Data_file, DataFrame)[!, "$(t%10080)"][1:end],Npred,numzones)';
+	# 		end
+	# 		# Tzon_sto[:,:,i] = reshape(CSV.read(sto_Data_file, DataFrame)[!, "$t"][1:end],numzones,Npred);
+	# 	end
+	# end
 	if uncertzon_flag == 1
 		for i = 1:numrl
-			sto_Data_file = string("Data/Sto_scenarios/Tz_n_sto$(i).csv");
+			sto_Data_file = string("Data/Scenarios_new/Tz_n_sto$(i).csv");
 			# println("$i th case")
-			if (t%10080)==0
-				Tzon_sto[:,:,i] = reshape(CSV.read(sto_Data_file, DataFrame)[!, "10080"][1:end],numzones,Npred);
-			else
-				Tzon_sto[:,:,i] = reshape(CSV.read(sto_Data_file, DataFrame)[!, "$(t%10080)"][1:end],numzones,Npred);
-			end
+			Tzon_sto[:,:,i] = reshape(CSV.read(sto_Data_file, DataFrame)[!, "Tdelta"][1:end],Npred,numzones)';
+			# print(Tzon_sto)
 			# Tzon_sto[:,:,i] = reshape(CSV.read(sto_Data_file, DataFrame)[!, "$t"][1:end],numzones,Npred);
 		end
 	end
@@ -162,7 +168,7 @@ function run(GUI_input::Dict)
 		result["HP$z"] = Pc_p[z];
 	end
 	df_result = DataFrame(ts = Time, demand_target = result["demand_target"])
-	
+
 	if debugflag == 1
 		if Time == StartTime
 			CSV.write("saved/output.csv", df_result, append=false)

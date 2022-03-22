@@ -43,8 +43,8 @@ function run(GUI_input::Dict)
 
     # @variable(m, p_c[z = 1:numzones, t = 1:H], Bin);   # hourly chiller power (Binary variable)
     @variable(m, p_c[z = 1:numzones, t = 1], lower_bound = 0, upper_bound = 1);   # next chiller power (normalized between 0 and 1)
-    @variable(m, slack_u[z = 1:numzones, t = 1:H] >= 0.0)
-    @variable(m, slack_d[z = 1:numzones, t = 1:H] >= 0.0)
+    @variable(m, slack_u[z = 1:numzones, t = 1:H, k = 1:numrl] >= 0.0)
+    @variable(m, slack_d[z = 1:numzones, t = 1:H, k = 1:numrl] >= 0.0)
 	@variable(m, p_c_p[z = 1:numzones, t = 2:H, k = 1:numrl], lower_bound = 0, upper_bound = 1);   # future hourly chiller power(normalized between 0 and 1)
     @variable(m, Tzon[z = 1:numzones,t = 1:H, k = 1:numrl]);   # hourly zone temperatures(unit in C)
 	# if uncertoat_flag == 0
@@ -60,8 +60,8 @@ function run(GUI_input::Dict)
 		for rl_idx = 1:numrl
 	        @constraint(m, [z=1:numzones, t=1], Tzon[z,t,rl_idx] == coeffs[z,4]+coeffs[z,3]*T_init[z]+coeffs[z,2]*T_oa_p[t] + coeffs[z,1]*Pm[z]*p_c[z,t])
 	        @constraint(m, [z=1:numzones, t=2:H], Tzon[z,t,rl_idx] == coeffs[z,4]+coeffs[z,3]*Tzon[z,t-1,rl_idx]+coeffs[z,2]*T_oa_p[t] + coeffs[z,1]*Pm[z]*p_c_p[z,t,rl_idx])
-            @constraint(m, [z=1:numzones, t=1:H], Tzon[z,t,rl_idx] + Tz_n_sto[z,t,rl_idx] <= Tzmax[z,t]+Tbd+slack_u[z,t]) # upper bound
-            @constraint(m, [z=1:numzones, t=1:H], Tzon[z,t,rl_idx] + Tz_n_sto[z,t,rl_idx] >= 22.8-Tbd-slack_d[z,t]) # lower bound
+            @constraint(m, [z=1:numzones, t=1:H], Tzon[z,t,rl_idx] + Tz_n_sto[z,t,rl_idx] <= Tzmax[z,t]+Tbd+slack_u[z,t,rl_idx]) # upper bound
+            @constraint(m, [z=1:numzones, t=1:H], Tzon[z,t,rl_idx] + Tz_n_sto[z,t,rl_idx] >= 22.8-Tbd-slack_d[z,t,rl_idx]) # lower bound
 		end
 	end
 
@@ -75,12 +75,12 @@ function run(GUI_input::Dict)
 		# for tt = 1:H
 		# 	println(price[min_idx[t0+Int((tt-1)*60*dT)]])
 		# end
-		@objective(m, Min, sum(pr[1]*Pm[z]*p_c[z,1] for z=1:numzones) + sum(pr[t]*Pm[z]*p_c_p[z,t,r] for z=1:numzones, t=2:H, r = 1:numrl)/numrl + sum(penalty_u*slack_u[z,t]+penalty_d*slack_d[z,t] for z = 1:numzones, t = 1:H));
+		@objective(m, Min, sum(pr[1]*Pm[z]*p_c[z,1] for z=1:numzones) + sum(pr[t]*Pm[z]*p_c_p[z,t,r] for z=1:numzones, t=2:H, r = 1:numrl)/numrl + sum(penalty_u*slack_u[z,t,k]+penalty_d*slack_d[z,t,k] for z = 1:numzones, t = 1:H, k = 1:numrl)/numrl);
         # @objective(m, Min, sum(prob_rl[t]*pr[t]/CoP[z]/R[z]*T_oa_p[t,k] for z=1:numzones, t=1:H, k=1:numrl) +
 		# 			sum(prob_rl[t]*pr[t]*C[z]/dT/CoP[z]*((1-dT/C[z]/R[z])*Tzon[z,t-1,k] - Tzon[z,t,k]) for z=1:numzones, t=2:H, k=1:numrl)-
 		# 			sum(prob_rl[1]*pr[1]*C[z]/dT/CoP[z]*Tzon[z,1,k] for z=1:numzones, k=1:numrl));
     else
-        @objective(m, Min, sum((Pm[z]*p_c[z,t]) for z=1:numzones, t=1:H)+penalty*sum(slack[z,t]^2 for z = 1:numzones, t = 1:H));
+        @objective(m, Min, sum((Pm[z]*p_c[z,t]) for z=1:numzones, t=1:H)+penalty*sum(slack[z,t,k]^2 for z = 1:numzones, t = 1:H, k = 1:numrl)/numrl);
     end
 
     status = optimize!(m);
@@ -101,7 +101,10 @@ function run(GUI_input::Dict)
     sol_pr = JuMP.value.(pr);
     sol_slack_u = JuMP.value.(slack_u);
     sol_slack_d = JuMP.value.(slack_d);
+    sol_slack_u = sum(sol_slack_u[:,:,k] for k=1:numrl)
+    sol_slack_d = sum(sol_slack_d[:,:,k] for k=1:numrl)
     # sol_cost = sum(sol_pr.*(Pm[z]*sol_p_c[z,:]) for z=1:numzones)
+    sol_cost = sum(sol_pr.*(Pm[z]*sol_p_c[z,:]) for z=1:numzones)
     sol_cost1 = sum(sol_slack_u[z,t] for z=1:numzones, t=1:H)
     sol_cost2 = sum(sol_slack_u[z,t]+sol_slack_d[z,t] for z = 1:numzones, t = 1:H)
     println(sol_cost1)

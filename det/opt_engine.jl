@@ -8,7 +8,7 @@ using DataFrames
 using CSV
 # using Conda
 # using PyCall
-using ScikitLearn
+using Statistics
 # Conda.add("nomkl")
 # Conda.add("joblib")
 # Conda.add("scikit-learn")
@@ -29,6 +29,7 @@ function run(GUI_input::Dict)
 
     # looking at a 24-hour-ahead time window for the optimal scheduling
     H = Int(24/dT);
+	Hm = Int(24/dT_m);
     t0 = Int(t_0); # start timestamp in minute
     if solverflag == 1
         m = Model(Ipopt.Optimizer);
@@ -63,7 +64,7 @@ function run(GUI_input::Dict)
 
     # # Force heat power to be zero
     # @constraint(m, heater_cons[z = 1:numzones, t=1:H], p_h[z,t] == 0.0)
-	penalty_u = 1e5;
+	penalty_u = 1e6;
     penalty_d = 1e3;
     if optcost_flag == 1
         @expression(m, pr[t=1:H], price[min_idx[t0+Int(t*60*dT)]])
@@ -78,22 +79,39 @@ function run(GUI_input::Dict)
 
     status = optimize!(m);
     println("Optimal scheduling for minute ", Int(t0), " -- Status: ", termination_status(m));
-    sol_p_c = JuMP.value.(p_c); # println(sol_p_c);
-    sol_tzon = JuMP.value.(Tzon); # println(sol_tzon);
-    sol_pr = JuMP.value.(pr);
-    sol_slack_u = JuMP.value.(slack_u);
-    sol_slack_d = JuMP.value.(slack_d);
+    sol_p_c_all = JuMP.value.(p_c); # println(sol_p_c);
+    sol_tzon_all = JuMP.value.(Tzon); # println(sol_tzon);
+    sol_pr_all = JuMP.value.(pr);
+    sol_slack_u_all = JuMP.value.(slack_u);
+    sol_slack_d_all = JuMP.value.(slack_d);
+	sol_Tz_upp_all = Tzmax .+ Tbd .+ sol_slack_u_all
+	# println("Upper bound:",sol_Tz_upp)
+	# println("Lower bound", sol_Tz_low)
+
+	Nmin = Int(dT_m/dT);
+	sol_p_c = zeros(numzones,Hm);
+	sol_tzon = zeros(numzones,Hm);
+	sol_pr = mean(reshape(sol_pr_all,Nmin,:),dims=1);
+	sol_slack_u = zeros(numzones,Hm);
+	sol_slack_d = zeros(numzones,Hm);
+	sol_Tz_upp = zeros(numzones,Hm);
+	for z = 1:numzones
+		sol_p_c[z,:] = mean(reshape(sol_p_c_all[z,:],Nmin,:),dims=1); # println(sol_p_c);
+	    sol_tzon[z,:] = mean(reshape(sol_tzon_all[z,:],Nmin,:),dims=1);# println(sol_tzon);
+	    sol_slack_u[z,:] = mean(reshape(sol_slack_u_all[z,:],Nmin,:),dims=1);
+	    sol_slack_d[z,:] = mean(reshape(sol_slack_d_all[z,:],Nmin,:),dims=1);
+		sol_Tz_upp[z,:] = mean(reshape(sol_Tz_upp_all[z,:],Nmin,:),dims=1);
+	end
     # sol_cost = sum(sol_pr.*(Pm[z]*sol_p_c[z,:]) for z=1:numzones)
-    sol_cost1 = sum(sol_slack_u[z,t] for z=1:numzones, t=1:H)
-    sol_cost2 = sum(sol_slack_u[z,t]+sol_slack_d[z,t] for z = 1:numzones, t = 1:H)
+    sol_cost = sum(sol_pr[t]*(Pm[z]*sol_p_c[z,t]) for z=1:numzones,t=1:Hm)
+    sol_cost1 = sum(sol_slack_u[z,t] for z=1:numzones, t=1:Hm)
+    sol_cost2 = sum(sol_slack_d[z,t] for z = 1:numzones, t = 1:Hm)
+    println(sol_cost)
     println(sol_cost1)
     println(sol_cost2)
 
-    sol_Tz_upp = Tzmax .+ Tbd .+ sol_slack_u
-    sol_Tz_low = 22.8 - Tbd .- sol_slack_d
-    println("Upper bound:",sol_Tz_upp)
-    println("Lower bound", sol_Tz_low)
-    df_cost = DataFrame(t0 = t0, cost1 = sol_cost1, cost2 = sol_cost2)
+	sol_Tz_low = 22.8 - Tbd .- sol_slack_d
+    df_cost = DataFrame(t0 = t0, cost = sol_cost, cost1 = sol_cost1, cost2 = sol_cost2)
     CSV.write("saved_cost.csv", df_cost, append=true)
     # result = DataFrame(
     # sol_p_c_1 = sol_p_c[1,:],
@@ -139,11 +157,11 @@ function run(GUI_input::Dict)
         insertcols!(result2,z,Symbol("sol_tzon_$z")=>vcat(T_init[z],sol_tzon[z,:]))
         insertcols!(result3,z,Symbol("sol_slack_u_$z")=>vcat(default_Values,sol_slack_u[z,:]))
         insertcols!(result4,z,Symbol("sol_slack_d_$z")=>vcat(default_Values,sol_slack_d[z,:]))
-        insertcols!(result5,z,Symbol("Tsp_$z") =>vcat(default_Values,Tzmax[z,:]))
+        insertcols!(result5,z,Symbol("Tsp_$z") =>vcat(default_Values,Tr[z,:]))
         insertcols!(result6,z,Symbol("Tupp_$z")=>vcat(default_Values,sol_Tz_upp[z,:]))
         insertcols!(result7,z,Symbol("Tlow_$z")=>vcat(default_Values,sol_Tz_low[z,:]))
     end
-    result0 = DataFrame(price = vcat(price[min_idx[t0]], sol_pr), OutdoorTemperature = vcat(T_oa,T_oa_p))
+    result0 = DataFrame(price = vcat(price[min_idx[t0]], vec(sol_pr)), OutdoorTemperature = vcat(T_oa,Toa_p))
     result = hcat(result0,result1,result2,result3,result4,result5,result6,result7)
 	# println(T_noise)
     return result;

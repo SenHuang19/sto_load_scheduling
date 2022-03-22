@@ -1,4 +1,4 @@
-FROM esetdeveloper/julia_base:1.6
+FROM esetdeveloper/julia:cbcdev
 
 ADD . /home/eset_engine
 WORKDIR /home/eset_engine
